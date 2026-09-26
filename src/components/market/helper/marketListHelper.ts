@@ -1,13 +1,15 @@
 import { useMarketStream } from "../../../hook/useMarketStream";
 import { useQueryParams } from "../../../hook/useQueryParams";
 import { calculatePercentageChange } from "../../../lib/price";
+import { useMarketStore } from "../../../store/marketStore";
 import type { MarketRowProps } from "../../../types/market";
 
 export const  marketListHelper = () => {
-  const { prices, baselines, directions } = useMarketStream()
+  const {  baselines, directions } = useMarketStream()
   const { getParam } = useQueryParams()
   const search = getParam("search").toLowerCase();
   const sort = getParam("sort");
+  const prices = useMarketStore((state) => state.prices);
 
   const markets: MarketRowProps[] = [];
 
