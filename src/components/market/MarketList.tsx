@@ -1,6 +1,6 @@
+import Alert from "../alert/Alert";
 import { marketListHelper } from "./helper/marketListHelper";
 import MarketRow from "./MarketRow";
-
 export default function MarketList() {
   const markets = marketListHelper();
   return (
@@ -33,6 +33,7 @@ export default function MarketList() {
           ))}
         </ul>
       </div>
+      <Alert />
     </section>
   );
 }
