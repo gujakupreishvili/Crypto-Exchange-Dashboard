@@ -84,7 +84,7 @@ export default function MarketList() {
               ? "You don't have any favorite cryptocurrencies yet."
               : chooseRow === "hidden"
               ? "You don't have any hidden cryptocurrencies."
-              : "No cryptocurrencies available."}
+              : "No cryptocurrencies found."}
           </div>
         ) : (
           <div className="overflow-x-auto">

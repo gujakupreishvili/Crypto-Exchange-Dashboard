@@ -3,10 +3,11 @@ import { useQueryParams } from "../../../hook/useQueryParams";
 import { calculatePercentageChange } from "../../../lib/price";
 import { useMarketStore } from "../../../store/marketStore";
 import type { MarketRowProps } from "../../../types/market";
+import { MARKET_NAMES } from "../../../data/marketNames";
 
-export const  marketListHelper = () => {
-  const {  baselines, directions } = useMarketStream()
-  const { getParam } = useQueryParams()
+export const marketListHelper = () => {
+  const { baselines, directions } = useMarketStream();
+  const { getParam } = useQueryParams();
   const search = getParam("search").toLowerCase();
   const sort = getParam("sort");
   const prices = useMarketStore((state) => state.prices);
@@ -20,7 +21,12 @@ export const  marketListHelper = () => {
       continue;
     }
 
-    if (!symbol.toLowerCase().includes(search)) {
+    const marketName = MARKET_NAMES[symbol] ?? "";
+
+    if (
+      !symbol.toLowerCase().includes(search) &&
+      !marketName.toLowerCase().includes(search)
+    ) {
       continue;
     }
 
@@ -45,5 +51,5 @@ export const  marketListHelper = () => {
     markets.sort((a, b) => a.symbol.localeCompare(b.symbol));
   }
 
-  return (markets);
-}
+  return markets;
+};
