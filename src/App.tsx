@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Header />
-      <div className="flex  justify-between">
+      <div className=" flex flex-col lg:flex-row justify-between">
         <MarketList />
         <CryptoConverter />
       </div>

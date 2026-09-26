@@ -14,7 +14,7 @@ export default function CryptoConverter() {
   const result = (Number(amount) * fromPrice) / toPrice;
 
   return (
-    <section className="mx-4 mt-8 w-[30%] min-w-[320px]">
+    <section className="mx-4 mt-8 lg:w-[35%] w-[95%] min-w-[320px]">
       <div className="mb-4">
         <h1 className="text-2xl font-semibold text-white">Crypto Converter</h1>
         <p className="mt-1 text-sm text-gray-500">
