@@ -1,22 +1,25 @@
 import { IoSwapVertical } from "react-icons/io5";
 import CryptoSelect from "./CryptoSelect";
-import { useState } from "react";
-import { useMarketStream } from "../../hook/useMarketStream";
-
+import { cryptoConvertHelper } from "./helper/cryptoConvertHelper";
 export default function CryptoConverter() {
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-  const [amount, setAmount] = useState("");
-  const { prices } = useMarketStream();
-  const fromPrice = prices[from];
-  const toPrice = prices[to];
-
-  const result = (Number(amount) * fromPrice) / toPrice;
+  const {
+    from,
+    setFrom,
+    to,
+    setTo,
+    amount,
+    amountError,
+    handleAmountChange,
+    fromPrice,
+    toPrice,
+    result,
+  } = cryptoConvertHelper();
 
   return (
-    <section className="mx-4 mt-8 lg:w-[35%] w-[95%] min-w-[320px]">
+    <section className="mx-4 mt-8 w-[95%] min-w-[320px] lg:w-[35%]">
       <div className="mb-4">
         <h1 className="text-2xl font-semibold text-white">Crypto Converter</h1>
+
         <p className="mt-1 text-sm text-gray-500">
           Convert between cryptocurrencies using live prices
         </p>
@@ -33,8 +36,10 @@ export default function CryptoConverter() {
               </span>
             )}
           </div>
+
           <CryptoSelect value={from} onChange={setFrom} />
         </div>
+
         <div className="mt-5">
           <label className="mb-2 block text-sm font-medium text-gray-400">
             Amount
@@ -42,12 +47,16 @@ export default function CryptoConverter() {
 
           <div className="relative">
             <input
-              type="number"
-              min="0"
+              type="text"
+              inputMode="decimal"
               value={amount}
-              onChange={(event) => setAmount(event.target.value)}
+              onChange={(event) => handleAmountChange(event.target.value)}
               placeholder="0.00"
-              className="w-full rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 text-lg text-white outline-none transition placeholder:text-gray-600 focus:border-gray-600"
+              className={`w-full rounded-xl border bg-gray-900 px-4 py-3 text-lg text-white outline-none transition placeholder:text-gray-600 ${
+                amountError
+                  ? "border-red-500/50 focus:border-red-500"
+                  : "border-gray-800 focus:border-gray-600"
+              }`}
             />
 
             {from && (
@@ -56,7 +65,12 @@ export default function CryptoConverter() {
               </span>
             )}
           </div>
+
+          {amountError && (
+            <p className="mt-2 text-sm text-red-400">{amountError}</p>
+          )}
         </div>
+
         <div className="relative my-5 flex items-center justify-center">
           <div className="absolute h-px w-full bg-gray-800" />
 
