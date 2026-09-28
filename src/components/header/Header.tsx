@@ -1,6 +1,4 @@
-import ConnectStatus from "../connectStatus/ConnectStatus";
-import Search from "../search/Search";
-import Sort from "../sort/Sort";
+import {ConnectStatus, Search, Sort} from '@/components';
 
 export default function Header() {
   return (

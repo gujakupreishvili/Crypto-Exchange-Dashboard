@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from 'react';
 
 export const useHiddenHelper = () => {
   const [hiddenArr, setHiddenArr] = useState<string[]>(() => {
-    const storedHidden = localStorage.getItem("crypto-hidden");
+    const storedHidden = localStorage.getItem('crypto-hidden');
     if (!storedHidden) {
       return [];
     }
@@ -10,15 +10,11 @@ export const useHiddenHelper = () => {
   });
 
   useEffect(() => {
-    localStorage.setItem("crypto-hidden", JSON.stringify(hiddenArr));
+    localStorage.setItem('crypto-hidden', JSON.stringify(hiddenArr));
   }, [hiddenArr]);
 
   const toogleHidden = (symbol: string) => {
-    setHiddenArr((prev) =>
-      prev.includes(symbol)
-        ? prev.filter((item) => item !== symbol)
-        : [...prev, symbol]
-    );
+    setHiddenArr(prev => (prev.includes(symbol) ? prev.filter(item => item !== symbol) : [...prev, symbol]));
   };
-  return { hiddenArr, toogleHidden };
+  return {hiddenArr, toogleHidden};
 };

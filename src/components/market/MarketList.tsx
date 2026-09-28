@@ -1,23 +1,19 @@
-import { useState } from "react";
-import Alert from "../alert/Alert";
-
-import MarketRow from "./MarketRow";
-
-import { useMarketStream } from "../../hook/useMarketStream";
-import { useMarketListHelper } from "./hooks/useMarketListHelper";
-import { useFavoriteHelper } from "./hooks/useFavoriteHelper";
-import { useHiddenHelper } from "./hooks/useHiddenHelper";
+import {useState} from 'react';
+import {useMarketStream} from '@hooks/useMarketStream';
+import Alert from '@components/alert/Alert';
+import MarketRow from './MarketRow';
+import {useFavoriteHelper} from './hooks/useFavoriteHelper';
+import {useHiddenHelper} from './hooks/useHiddenHelper';
+import {useMarketListHelper} from './hooks/useMarketListHelper';
 
 export default function MarketList() {
   const markets = useMarketListHelper();
-  const { connectionStatus } = useMarketStream();
-  const { favoriteArr, toggleFavorite } = useFavoriteHelper();
-  const { hiddenArr, toogleHidden } = useHiddenHelper();
-  const [chooseRow, setChooseRow] = useState<"all" | "favorite" | "hidden">(
-    "all"
-  );
-  const filteredMarkets = markets.filter((market) => {
-    if (chooseRow === "hidden") {
+  const {connectionStatus} = useMarketStream();
+  const {favoriteArr, toggleFavorite} = useFavoriteHelper();
+  const {hiddenArr, toogleHidden} = useHiddenHelper();
+  const [chooseRow, setChooseRow] = useState<'all' | 'favorite' | 'hidden'>('all');
+  const filteredMarkets = markets.filter(market => {
+    if (chooseRow === 'hidden') {
       return hiddenArr.includes(market.symbol);
     }
 
@@ -25,7 +21,7 @@ export default function MarketList() {
       return false;
     }
 
-    if (chooseRow === "favorite") {
+    if (chooseRow === 'favorite') {
       return favoriteArr.includes(market.symbol);
     }
 
@@ -37,61 +33,54 @@ export default function MarketList() {
       <div className="mb-4 flex flex-col lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-white">Market Place</h1>
-          <p className="mt-1 text-sm text-gray-400">
-            Live cryptocurrency market prices
-          </p>
+          <p className="mt-1 text-sm text-gray-400">Live cryptocurrency market prices</p>
         </div>
         <div className="mt-5 inline-flex rounded-xl border border-gray-800 bg-gray-950 p-1 justify-around">
           <button
             type="button"
-            onClick={() => setChooseRow("all")}
+            onClick={() => setChooseRow('all')}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-              chooseRow === "all"
-                ? "bg-white text-gray-950 shadow-sm"
-                : "text-gray-400 hover:bg-gray-900 hover:text-white"
-            }`}
-          >
+              chooseRow === 'all'
+                ? 'bg-white text-gray-950 shadow-sm'
+                : 'text-gray-400 hover:bg-gray-900 hover:text-white'
+            }`}>
             All
           </button>
 
           <button
             type="button"
-            onClick={() => setChooseRow("favorite")}
+            onClick={() => setChooseRow('favorite')}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-              chooseRow === "favorite"
-                ? "bg-white text-gray-950 shadow-sm"
-                : "text-gray-400 hover:bg-gray-900 hover:text-white"
-            }`}
-          >
+              chooseRow === 'favorite'
+                ? 'bg-white text-gray-950 shadow-sm'
+                : 'text-gray-400 hover:bg-gray-900 hover:text-white'
+            }`}>
             Favorite
           </button>
 
           <button
             type="button"
-            onClick={() => setChooseRow("hidden")}
+            onClick={() => setChooseRow('hidden')}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-              chooseRow === "hidden"
-                ? "bg-white text-gray-950 shadow-sm"
-                : "text-gray-400 hover:bg-gray-900 hover:text-white"
-            }`}
-          >
+              chooseRow === 'hidden'
+                ? 'bg-white text-gray-950 shadow-sm'
+                : 'text-gray-400 hover:bg-gray-900 hover:text-white'
+            }`}>
             Hidden
           </button>
         </div>
       </div>
 
       <div className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-950">
-        {connectionStatus === "loading" && filteredMarkets.length === 0 ? (
-          <div className="p-8 text-center text-gray-500">
-            Loading cryptocurrencies...
-          </div>
+        {connectionStatus === 'loading' && filteredMarkets.length === 0 ? (
+          <div className="p-8 text-center text-gray-500">Loading cryptocurrencies...</div>
         ) : filteredMarkets.length === 0 ? (
           <div className="p-8 text-center text-gray-500">
-            {chooseRow === "favorite"
+            {chooseRow === 'favorite'
               ? "You don't have any favorite cryptocurrencies yet."
-              : chooseRow === "hidden"
-              ? "You don't have any hidden cryptocurrencies."
-              : "No cryptocurrencies found."}
+              : chooseRow === 'hidden'
+                ? "You don't have any hidden cryptocurrencies."
+                : 'No cryptocurrencies found.'}
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -108,7 +97,7 @@ export default function MarketList() {
               </thead>
 
               <tbody>
-                {filteredMarkets.map((market) => (
+                {filteredMarkets.map(market => (
                   <MarketRow
                     key={market.symbol}
                     symbol={market.symbol}

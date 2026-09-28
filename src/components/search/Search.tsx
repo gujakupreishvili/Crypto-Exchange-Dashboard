@@ -1,13 +1,13 @@
-import { CiSearch } from "react-icons/ci";
-import { useQueryParams } from "../../hook/useQueryParams";
+import {CiSearch} from 'react-icons/ci';
+import {useQueryParams} from '@hooks/useQueryParams';
 
 export default function Search() {
-  const { getParam, setParam } = useQueryParams();
+  const {getParam, setParam} = useQueryParams();
 
-  const search = getParam("search");
+  const search = getParam('search');
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setParam("search", event.target.value);
+    setParam('search', event.target.value);
   };
 
   return (

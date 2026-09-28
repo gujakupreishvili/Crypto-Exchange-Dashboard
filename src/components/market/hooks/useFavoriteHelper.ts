@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from 'react';
 
 export const useFavoriteHelper = () => {
   const [favoriteArr, setFavoriteArr] = useState<string[]>(() => {
-    const storedFavorites = localStorage.getItem("crypto-favorites");
+    const storedFavorites = localStorage.getItem('crypto-favorites');
 
     if (!storedFavorites) {
       return [];
@@ -11,15 +11,11 @@ export const useFavoriteHelper = () => {
   });
 
   useEffect(() => {
-    localStorage.setItem("crypto-favorites", JSON.stringify(favoriteArr));
+    localStorage.setItem('crypto-favorites', JSON.stringify(favoriteArr));
   }, [favoriteArr]);
 
   const toggleFavorite = (symbol: string) => {
-    setFavoriteArr((prev) =>
-      prev.includes(symbol)
-        ? prev.filter((item) => item !== symbol)
-        : [...prev, symbol]
-    );
+    setFavoriteArr(prev => (prev.includes(symbol) ? prev.filter(item => item !== symbol) : [...prev, symbol]));
   };
-  return { favoriteArr, toggleFavorite };
+  return {favoriteArr, toggleFavorite};
 };

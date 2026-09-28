@@ -1,9 +1,6 @@
-import type { PriceDirection } from "../types/market";
+import type {PriceDirection} from '@/types/market';
 
-export const calculatePercentageChange = (
-  currentPrice: number,
-  baselinePrice: number
-): number => {
+export const calculatePercentageChange = (currentPrice: number, baselinePrice: number): number => {
   if (baselinePrice === 0) {
     return 0;
   }
@@ -11,17 +8,14 @@ export const calculatePercentageChange = (
   return ((currentPrice - baselinePrice) / baselinePrice) * 100;
 };
 
-export const getPriceDirection = (
-  currentPrice: number,
-  previousPrice: number
-): PriceDirection => {
+export const getPriceDirection = (currentPrice: number, previousPrice: number): PriceDirection => {
   if (currentPrice > previousPrice) {
-    return "up";
+    return 'up';
   }
 
   if (currentPrice < previousPrice) {
-    return "down";
+    return 'down';
   }
 
-  return "unchanged";
+  return 'unchanged';
 };

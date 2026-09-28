@@ -1,16 +1,16 @@
-import { useMarketStream } from "../../../hook/useMarketStream";
-import { useQueryParams } from "../../../hook/useQueryParams";
-import { calculatePercentageChange } from "../../../lib/price";
-import { useMarketStore } from "../../../store/marketStore";
-import type { MarketRowProps } from "../../../types/market";
-import { MARKET_NAMES } from "../../../data/marketNames";
+import {useMarketStore} from '@/store/marketStore';
+import type {MarketRowProps} from '@/types/market';
+import {useMarketStream} from '@hooks/useMarketStream';
+import {useQueryParams} from '@hooks/useQueryParams';
+import {calculatePercentageChange} from '@lib/price';
+import {MARKET_NAMES} from '@data/marketNames';
 
 export const useMarketListHelper = () => {
-  const { baselines, directions } = useMarketStream();
-  const { getParam } = useQueryParams();
-  const search = getParam("search").toLowerCase();
-  const sort = getParam("sort");
-  const prices = useMarketStore((state) => state.prices);
+  const {baselines, directions} = useMarketStream();
+  const {getParam} = useQueryParams();
+  const search = getParam('search').toLowerCase();
+  const sort = getParam('sort');
+  const prices = useMarketStore(state => state.prices);
 
   const markets: MarketRowProps[] = [];
 
@@ -21,12 +21,9 @@ export const useMarketListHelper = () => {
       continue;
     }
 
-    const marketName = MARKET_NAMES[symbol] ?? "";
+    const marketName = MARKET_NAMES[symbol] ?? '';
 
-    if (
-      !symbol.toLowerCase().includes(search) &&
-      !marketName.toLowerCase().includes(search)
-    ) {
+    if (!symbol.toLowerCase().includes(search) && !marketName.toLowerCase().includes(search)) {
       continue;
     }
 
@@ -39,18 +36,16 @@ export const useMarketListHelper = () => {
     });
   }
 
-  if (sort === "currentPrice") {
+  if (sort === 'currentPrice') {
     markets.sort((a, b) => b.price - a.price);
   }
 
-  if (sort === "priceChange") {
+  if (sort === 'priceChange') {
     markets.sort((a, b) => b.percentageChange - a.percentageChange);
   }
 
-  if (sort === "name") {
-    markets.sort((a, b) =>
-      (MARKET_NAMES[a.symbol] ?? "").localeCompare(MARKET_NAMES[b.symbol] ?? "")
-    );
+  if (sort === 'name') {
+    markets.sort((a, b) => (MARKET_NAMES[a.symbol] ?? '').localeCompare(MARKET_NAMES[b.symbol] ?? ''));
   }
 
   return markets;

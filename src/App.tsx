@@ -1,6 +1,4 @@
-import CryptoConverter from "./components/cryptoConverter/CryptoConverter";
-import Header from "./components/header/Header";
-import MarketList from "./components/market/MarketList";
+import {Header, MarketList, CryptoConverter} from '@components';
 
 function App() {
   return (

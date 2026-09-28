@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import type { ConnectionStatus, PriceDirection } from "../types/market";
-import { getPriceDirection } from "../lib/price";
+import {create} from 'zustand';
+import type {ConnectionStatus, PriceDirection} from '@/types/market';
+import {getPriceDirection} from '@lib/price';
 
 type MarketStore = {
   prices: Record<string, number>;
@@ -12,14 +12,14 @@ type MarketStore = {
   setConnectionStatus: (status: ConnectionStatus) => void;
 };
 
-export const useMarketStore = create<MarketStore>((set) => ({
+export const useMarketStore = create<MarketStore>(set => ({
   prices: {},
   directions: {},
   baselines: {},
-  connectionStatus: "loading",
+  connectionStatus: 'loading',
 
   setPrice: (symbol, price) => {
-    set((state) => {
+    set(state => {
       const previousPrice = state.prices[symbol];
 
       if (previousPrice === undefined) {
@@ -44,7 +44,7 @@ export const useMarketStore = create<MarketStore>((set) => ({
     });
   },
   setBaseline: (symbol, price) => {
-    set((state) => {
+    set(state => {
       if (state.baselines[symbol] !== undefined) {
         return state;
       }
@@ -57,7 +57,7 @@ export const useMarketStore = create<MarketStore>((set) => ({
       };
     });
   },
-  setConnectionStatus: (status) => {
-    set({ connectionStatus: status });
+  setConnectionStatus: status => {
+    set({connectionStatus: status});
   },
 }));

@@ -1,10 +1,8 @@
-import { MARKET_PAIRS } from "../data/pairs";
-import { useMarketStore } from "../store/marketStore";
-import type { MarketPrice } from "../types/market";
+import {useMarketStore} from '@/store/marketStore';
+import type {MarketPrice} from '@/types/market';
+import {MARKET_PAIRS} from '@data/pairs';
 
-const streams = MARKET_PAIRS.map(
-  (symbol) => `${symbol.toLowerCase()}@miniTicker`
-).join("/");
+const streams = MARKET_PAIRS.map(symbol => `${symbol.toLowerCase()}@miniTicker`).join('/');
 
 const BINANCE_WS_URL = `wss://stream.binance.com:9443/stream?streams=${streams}`;
 
@@ -13,15 +11,13 @@ let subscribers = 0;
 let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
 let hasSocketError = false;
 
-export const connectToBinance = (
-  onTick: (marketPrice: MarketPrice) => void
-) => {
+export const connectToBinance = (onTick: (marketPrice: MarketPrice) => void) => {
   const socket = new WebSocket(BINANCE_WS_URL);
 
-  socket.onmessage = (event) => {
+  socket.onmessage = event => {
     const message = JSON.parse(event.data);
 
-    const { s: symbol, c: price } = message.data;
+    const {s: symbol, c: price} = message.data;
 
     onTick({
       symbol,
@@ -45,20 +41,20 @@ const scheduleReconnect = (hasError = false) => {
     () => {
       reconnectTimer = null;
 
-      useMarketStore.getState().setConnectionStatus("reconnecting");
+      useMarketStore.getState().setConnectionStatus('reconnecting');
 
       createMarketSocket();
     },
-    hasError ? 1000 : 0
+    hasError ? 1000 : 0,
   );
 };
 
 const createMarketSocket = () => {
   hasSocketError = false;
-  useMarketStore.getState().setConnectionStatus("loading");
+  useMarketStore.getState().setConnectionStatus('loading');
 
-  const activeSocket = connectToBinance((tick) => {
-    const { setPrice, setBaseline } = useMarketStore.getState();
+  const activeSocket = connectToBinance(tick => {
+    const {setPrice, setBaseline} = useMarketStore.getState();
 
     setPrice(tick.symbol, tick.price);
     setBaseline(tick.symbol, tick.price);
@@ -71,7 +67,7 @@ const createMarketSocket = () => {
       return;
     }
 
-    useMarketStore.getState().setConnectionStatus("connected");
+    useMarketStore.getState().setConnectionStatus('connected');
   };
 
   activeSocket.onerror = () => {
@@ -81,7 +77,7 @@ const createMarketSocket = () => {
 
     hasSocketError = true;
 
-    useMarketStore.getState().setConnectionStatus("error");
+    useMarketStore.getState().setConnectionStatus('error');
   };
 
   activeSocket.onclose = () => {
@@ -96,7 +92,7 @@ const createMarketSocket = () => {
       return;
     }
 
-    useMarketStore.getState().setConnectionStatus("disconnected");
+    useMarketStore.getState().setConnectionStatus('disconnected');
     scheduleReconnect();
   };
 };

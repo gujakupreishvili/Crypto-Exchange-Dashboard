@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-import { useMarketStream } from "../hook/useMarketStream";
-import { calculatePercentageChange } from "../lib/price";
+import {useEffect, useRef, useState} from 'react';
+import {useMarketStream} from '@hooks/useMarketStream';
+import {calculatePercentageChange} from '@lib/price';
 
 const ALERT_THRESHOLD = 2;
 
@@ -9,11 +9,11 @@ type Alert = {
   initialPrice: number;
   currentPrice: number;
   percentageChange: number;
-  direction: "increased" | "decreased";
+  direction: 'increased' | 'decreased';
 };
 
 export const useAlerts = () => {
-  const { prices, baselines } = useMarketStream();
+  const {prices, baselines} = useMarketStream();
 
   const alertedSymbols = useRef<Set<string>>(new Set());
   const [alerts, setAlerts] = useState<Alert[]>([]);
@@ -45,10 +45,10 @@ export const useAlerts = () => {
         initialPrice: baseline,
         currentPrice: price,
         percentageChange,
-        direction: percentageChange > 0 ? "increased" : "decreased",
+        direction: percentageChange > 0 ? 'increased' : 'decreased',
       };
 
-      setAlerts((currentAlerts) => [...currentAlerts, newAlert]);
+      setAlerts(currentAlerts => [...currentAlerts, newAlert]);
     }
   }, [prices, baselines]);
 

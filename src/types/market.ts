@@ -19,11 +19,6 @@ export type MarketRowProps = {
   onToggleFavorite?: () => void;
 };
 
-export type PriceDirection = "up" | "down" | "unchanged";
+export type PriceDirection = 'up' | 'down' | 'unchanged';
 
-export type ConnectionStatus =
-  | "loading"
-  | "connected"
-  | "reconnecting"
-  | "disconnected"
-  | "error";
+export type ConnectionStatus = 'loading' | 'connected' | 'reconnecting' | 'disconnected' | 'error';
