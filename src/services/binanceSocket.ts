@@ -11,6 +11,7 @@ const BINANCE_WS_URL = `wss://stream.binance.com:9443/stream?streams=${streams}`
 let socket: WebSocket | null = null;
 let subscribers = 0;
 let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+let hasSocketError = false;
 
 export const connectToBinance = (
   onTick: (marketPrice: MarketPrice) => void
@@ -30,7 +31,8 @@ export const connectToBinance = (
 
   return socket;
 };
-const scheduleReconnect = () => {
+
+const scheduleReconnect = (hasError = false) => {
   if (subscribers === 0) {
     return;
   }
@@ -38,19 +40,26 @@ const scheduleReconnect = () => {
   if (reconnectTimer) {
     return;
   }
+
   reconnectTimer = setTimeout(() => {
     reconnectTimer = null;
+
+    useMarketStore.getState().setConnectionStatus("reconnecting");
+
     createMarketSocket();
-  }, 1000);
+  }, hasError ? 1000 : 0);
 };
 
 const createMarketSocket = () => {
+  hasSocketError = false;
+
   const activeSocket = connectToBinance((tick) => {
     const { setPrice, setBaseline } = useMarketStore.getState();
 
     setPrice(tick.symbol, tick.price);
     setBaseline(tick.symbol, tick.price);
   });
+
   socket = activeSocket;
 
   activeSocket.onopen = () => {
@@ -60,18 +69,28 @@ const createMarketSocket = () => {
 
     useMarketStore.getState().setConnectionStatus("connected");
   };
+
   activeSocket.onerror = () => {
     if (socket !== activeSocket) {
       return;
     }
 
+    hasSocketError = true;
+
     useMarketStore.getState().setConnectionStatus("error");
   };
+
   activeSocket.onclose = () => {
     if (socket !== activeSocket) {
       return;
     }
+
     socket = null;
+
+    if (hasSocketError) {
+      scheduleReconnect(true);
+      return;
+    }
 
     useMarketStore.getState().setConnectionStatus("disconnected");
     scheduleReconnect();
@@ -84,6 +103,7 @@ export const acquireMarketStream = () => {
   if (socket) {
     return;
   }
+
   if (reconnectTimer) {
     clearTimeout(reconnectTimer);
     reconnectTimer = null;
@@ -91,11 +111,14 @@ export const acquireMarketStream = () => {
 
   createMarketSocket();
 };
+
 export const releaseMarketStream = () => {
   subscribers = Math.max(0, subscribers - 1);
+
   if (subscribers > 0) {
     return;
   }
+
   if (reconnectTimer) {
     clearTimeout(reconnectTimer);
     reconnectTimer = null;

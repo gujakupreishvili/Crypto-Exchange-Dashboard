@@ -7,7 +7,6 @@ import {
   FaStar,
 } from "react-icons/fa";
 import type { MarketRowProps } from "../../types/market";
-import { useState } from "react";
 
 export default function MarketRow({
   symbol,
