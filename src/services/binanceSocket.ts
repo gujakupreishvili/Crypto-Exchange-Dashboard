@@ -43,15 +43,17 @@ const scheduleReconnect = (hasError = false) => {
 
       useMarketStore.getState().setConnectionStatus('reconnecting');
 
-      createMarketSocket();
+      createMarketSocket(true);
     },
     hasError ? 1000 : 0,
   );
 };
 
-const createMarketSocket = () => {
+const createMarketSocket = (isReconnect = false) => {
   hasSocketError = false;
-  useMarketStore.getState().setConnectionStatus('loading');
+  if (!isReconnect) {
+    useMarketStore.getState().setConnectionStatus("loading");
+  }
 
   const activeSocket = connectToBinance(tick => {
     const {setPrice, setBaseline} = useMarketStore.getState();

@@ -72,15 +72,21 @@ export default function MarketList() {
       </div>
 
       <div className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-950">
-        {connectionStatus === 'loading' && filteredMarkets.length === 0 ? (
-          <div className="p-8 text-center text-gray-500">Loading cryptocurrencies...</div>
-        ) : filteredMarkets.length === 0 ? (
+        {filteredMarkets.length === 0 ? (
           <div className="p-8 text-center text-gray-500">
-            {chooseRow === 'favorite'
-              ? "You don't have any favorite cryptocurrencies yet."
-              : chooseRow === 'hidden'
-                ? "You don't have any hidden cryptocurrencies."
-                : 'No cryptocurrencies found.'}
+            {connectionStatus === 'loading'
+              ? 'Loading cryptocurrencies...'
+              : connectionStatus === 'reconnecting'
+                ? 'Reconnecting to Binance...'
+                : connectionStatus === 'error'
+                  ? 'Failed to connect to Binance.'
+                  : connectionStatus === 'disconnected'
+                    ? 'Disconnected from Binance.'
+                    : chooseRow === 'favorite'
+                      ? "You don't have any favorite cryptocurrencies yet."
+                      : chooseRow === 'hidden'
+                        ? "You don't have any hidden cryptocurrencies."
+                        : 'No cryptocurrencies found.'}
           </div>
         ) : (
           <div className="overflow-x-auto">
