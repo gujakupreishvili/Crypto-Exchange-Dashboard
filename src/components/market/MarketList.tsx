@@ -5,9 +5,11 @@ import { favoriteHelper } from "./helper/favoriteHelper";
 import { marketListHelper } from "./helper/marketListHelper";
 import MarketRow from "./MarketRow";
 import { hiddenHelper } from "./helper/hiddenHelpet";
+import { useMarketStream } from "../../hook/useMarketStream";
 
 export default function MarketList() {
   const markets = marketListHelper();
+  const { connectionStatus } = useMarketStream();
   const { favoriteArr, toggleFavorite } = favoriteHelper();
   const { hiddenArr, toogleHidden } = hiddenHelper();
   const [chooseRow, setChooseRow] = useState<"all" | "favorite" | "hidden">(
@@ -78,7 +80,11 @@ export default function MarketList() {
       </div>
 
       <div className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-950">
-        {filteredMarkets.length === 0 ? (
+        {connectionStatus === "loading" && filteredMarkets.length === 0 ? (
+          <div className="p-8 text-center text-gray-500">
+            Loading cryptocurrencies...
+          </div>
+        ) : filteredMarkets.length === 0 ? (
           <div className="p-8 text-center text-gray-500">
             {chooseRow === "favorite"
               ? "You don't have any favorite cryptocurrencies yet."

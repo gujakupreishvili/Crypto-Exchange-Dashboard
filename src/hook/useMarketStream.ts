@@ -11,17 +11,12 @@ export const useMarketStream = () => {
   const baselines = useMarketStore((state) => state.baselines);
   const connectionStatus = useMarketStore((state) => state.connectionStatus);
 
-  const setConnectionStatus = useMarketStore(
-    (state) => state.setConnectionStatus
-  );
-
   useEffect(() => {
-    setConnectionStatus("loading");
     acquireMarketStream();
     return () => {
       releaseMarketStream();
     };
-  }, [setConnectionStatus]);
+  }, []);
 
   return {
     prices,

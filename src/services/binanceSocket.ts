@@ -41,17 +41,21 @@ const scheduleReconnect = (hasError = false) => {
     return;
   }
 
-  reconnectTimer = setTimeout(() => {
-    reconnectTimer = null;
+  reconnectTimer = setTimeout(
+    () => {
+      reconnectTimer = null;
 
-    useMarketStore.getState().setConnectionStatus("reconnecting");
+      useMarketStore.getState().setConnectionStatus("reconnecting");
 
-    createMarketSocket();
-  }, hasError ? 1000 : 0);
+      createMarketSocket();
+    },
+    hasError ? 1000 : 0
+  );
 };
 
 const createMarketSocket = () => {
   hasSocketError = false;
+  useMarketStore.getState().setConnectionStatus("loading");
 
   const activeSocket = connectToBinance((tick) => {
     const { setPrice, setBaseline } = useMarketStore.getState();
