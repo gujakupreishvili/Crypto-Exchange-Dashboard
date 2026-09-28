@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const hiddenHelper = () => {
+export const useHiddenHelper = () => {
   const [hiddenArr, setHiddenArr] = useState<string[]>(() => {
     const storedHidden = localStorage.getItem("crypto-hidden");
     if (!storedHidden) {

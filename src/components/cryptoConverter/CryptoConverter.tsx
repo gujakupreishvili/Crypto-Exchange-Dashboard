@@ -1,6 +1,6 @@
 import { IoSwapVertical } from "react-icons/io5";
 import CryptoSelect from "./CryptoSelect";
-import { cryptoConvertHelper } from "./helper/cryptoConvertHelper";
+import { useCryptoConvert } from "./hook/useCryptoConvert";
 export default function CryptoConverter() {
   const {
     from,
@@ -13,7 +13,7 @@ export default function CryptoConverter() {
     fromPrice,
     toPrice,
     result,
-  } = cryptoConvertHelper();
+  } = useCryptoConvert();
 
   return (
     <section className="mx-4 mt-8 w-[95%] min-w-[320px] lg:w-[35%]">

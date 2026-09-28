@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const favoriteHelper = () => {
+export const useFavoriteHelper = () => {
   const [favoriteArr, setFavoriteArr] = useState<string[]>(() => {
     const storedFavorites = localStorage.getItem("crypto-favorites");
 

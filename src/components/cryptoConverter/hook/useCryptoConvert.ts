@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMarketStream } from "../../../hook/useMarketStream";
 
-export const cryptoConvertHelper = () => {
+export const useCryptoConvert = () => {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [amount, setAmount] = useState("");

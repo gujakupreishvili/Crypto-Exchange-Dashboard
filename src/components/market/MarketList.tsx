@@ -1,17 +1,18 @@
 import { useState } from "react";
 import Alert from "../alert/Alert";
-import { favoriteHelper } from "./helper/favoriteHelper";
 
-import { marketListHelper } from "./helper/marketListHelper";
 import MarketRow from "./MarketRow";
-import { hiddenHelper } from "./helper/hiddenHelpet";
+
 import { useMarketStream } from "../../hook/useMarketStream";
+import { useMarketListHelper } from "./hooks/useMarketListHelper";
+import { useFavoriteHelper } from "./hooks/useFavoriteHelper";
+import { useHiddenHelper } from "./hooks/useHiddenHelper";
 
 export default function MarketList() {
-  const markets = marketListHelper();
+  const markets = useMarketListHelper();
   const { connectionStatus } = useMarketStream();
-  const { favoriteArr, toggleFavorite } = favoriteHelper();
-  const { hiddenArr, toogleHidden } = hiddenHelper();
+  const { favoriteArr, toggleFavorite } = useFavoriteHelper();
+  const { hiddenArr, toogleHidden } = useHiddenHelper();
   const [chooseRow, setChooseRow] = useState<"all" | "favorite" | "hidden">(
     "all"
   );

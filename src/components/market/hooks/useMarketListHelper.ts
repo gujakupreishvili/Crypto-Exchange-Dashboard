@@ -5,7 +5,7 @@ import { useMarketStore } from "../../../store/marketStore";
 import type { MarketRowProps } from "../../../types/market";
 import { MARKET_NAMES } from "../../../data/marketNames";
 
-export const marketListHelper = () => {
+export const useMarketListHelper = () => {
   const { baselines, directions } = useMarketStream();
   const { getParam } = useQueryParams();
   const search = getParam("search").toLowerCase();
