@@ -1,6 +1,6 @@
+import {CryptoSelect} from '@/components';
 import {IoSwapVertical} from 'react-icons/io5';
 import {useCryptoConvert} from './hook/useCryptoConvert';
-import { CryptoSelect } from '@/components';
 
 export default function CryptoConverter() {
   const {from, setFrom, to, setTo, amount, amountError, handleAmountChange, fromPrice, toPrice, result} =

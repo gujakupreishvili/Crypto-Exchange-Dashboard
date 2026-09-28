@@ -1,9 +1,5 @@
+import type {CryptoSelectProps} from '@/types/CryptoSelectProps';
 import {useMarketStream} from '@hooks/useMarketStream';
-
-type CryptoSelectProps = {
-  value: string;
-  onChange: (value: string) => void;
-};
 
 export default function CryptoSelect({value, onChange}: CryptoSelectProps) {
   const {baselines} = useMarketStream();

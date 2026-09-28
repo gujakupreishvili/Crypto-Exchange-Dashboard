@@ -42,7 +42,7 @@ export const useAlerts = () => {
       alertedSymbols.current.add(symbol);
 
       const newAlert: Alert = {
-        id:crypto.randomUUID(),
+        id: crypto.randomUUID(),
         symbol,
         initialPrice: baseline,
         currentPrice: price,
