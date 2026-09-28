@@ -48,7 +48,9 @@ export const marketListHelper = () => {
   }
 
   if (sort === "name") {
-    markets.sort((a, b) => a.symbol.localeCompare(b.symbol));
+    markets.sort((a, b) =>
+      (MARKET_NAMES[a.symbol] ?? "").localeCompare(MARKET_NAMES[b.symbol] ?? "")
+    );
   }
 
   return markets;

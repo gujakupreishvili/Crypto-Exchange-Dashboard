@@ -1,3 +1,4 @@
+import { CiSearch } from "react-icons/ci";
 import { useQueryParams } from "../../hook/useQueryParams";
 
 export default function Search() {
@@ -10,13 +11,14 @@ export default function Search() {
   };
 
   return (
-    <div className="rounded-3xl border border-gray-600 px-3 py-1">
+    <div className="w-full rounded-3xl border border-gray-600 px-3 py-1 sm:w-64 flex items-center lg:gap-2">
+      <CiSearch className="text-white hidden lg:block" />
       <input
         type="text"
         placeholder="Search symbol or name"
         value={search}
         onChange={handleSearchChange}
-        className="w-full text-gray-300 outline-none placeholder:text-gray-300"
+        className="lg:w-[95%] w-full text-gray-300 outline-none placeholder:text-gray-300"
       />
     </div>
   );

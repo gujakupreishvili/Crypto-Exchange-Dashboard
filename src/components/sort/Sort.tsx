@@ -11,7 +11,7 @@ export default function Sort() {
     <select
       value={sort}
       onChange={handleChange}
-      className="border border-gray-600 bg-black text-white"
+      className="rounded-3xl border border-gray-600 bg-black px-2 py-2 text-white outline-none"
     >
       {!sort && (
         <option value="" disabled>
