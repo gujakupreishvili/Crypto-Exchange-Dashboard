@@ -5,6 +5,7 @@ import {calculatePercentageChange} from '@lib/price';
 const ALERT_THRESHOLD = 2;
 
 type Alert = {
+  id: string;
   symbol: string;
   initialPrice: number;
   currentPrice: number;
@@ -41,6 +42,7 @@ export const useAlerts = () => {
       alertedSymbols.current.add(symbol);
 
       const newAlert: Alert = {
+        id:crypto.randomUUID(),
         symbol,
         initialPrice: baseline,
         currentPrice: price,
@@ -52,5 +54,9 @@ export const useAlerts = () => {
     }
   }, [prices, baselines]);
 
-  return alerts;
+  const dismissAlert = (id: string) => {
+    setAlerts(currentAlerts => currentAlerts.filter(alert => alert.id !== id));
+  };
+
+  return {alerts, dismissAlert};
 };

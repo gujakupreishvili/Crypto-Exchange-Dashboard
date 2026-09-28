@@ -1,23 +1,23 @@
-import {FaChevronDown, FaChevronUp} from 'react-icons/fa';
+import {FaChevronDown, FaChevronUp, FaTimes} from 'react-icons/fa';
 import {useAlerts} from '@hooks/useAlert';
 
 export default function Alert() {
-  const alerts = useAlerts();
+  const {alerts, dismissAlert} = useAlerts();
 
   if (alerts.length === 0) {
     return null;
   }
 
   return (
-    <div className="fixed right-5 top-5 z-50 flex w-96 flex-col gap-3">
-      {alerts.map(({symbol, initialPrice, currentPrice, percentageChange, direction}) => {
+    <div className="fixed lg:right-5 top-5 z-50 flex w-[93%] lg:w-[30%] flex-col gap-3">
+      {alerts.map(({id, symbol, initialPrice, currentPrice, percentageChange, direction}) => {
         const isIncreased = direction === 'increased';
 
         return (
           <div
-            key={symbol}
-            className="overflow-hidden rounded-2xl border border-white/10 bg-gray-950/95 p-4 text-white shadow-2xl backdrop-blur-xl">
-            <div className="flex items-start justify-between gap-4">
+            key={id}
+            className=" relative overflow-hidden rounded-2xl border border-white/10 bg-gray-950/95 p-4 text-white shadow-2xl backdrop-blur-xl">
+            <div className="flex items-start justify-between gap-4 pr-8">
               <div>
                 <p className="text-xs font-medium uppercase tracking-wider text-gray-500">Price Alert</p>
 
@@ -43,7 +43,8 @@ export default function Alert() {
               {isIncreased ? <FaChevronUp size={12} /> : <FaChevronDown size={12} />}
 
               <span>
-                {isIncreased ? 'Increased' : 'Decreased'} by {Math.abs(percentageChange).toFixed(2)}%
+                {isIncreased ? 'increased' : 'decreased'} by {Math.abs(percentageChange).toFixed(2)}% since you opened
+                the page.
               </span>
             </div>
 
@@ -58,6 +59,13 @@ export default function Alert() {
                 <p className="mt-1 text-sm font-medium text-gray-200">${currentPrice.toLocaleString()}</p>
               </div>
             </div>
+            <button
+              type="button"
+              onClick={() => dismissAlert(id)}
+              aria-label={`${symbol} alert-ის დახურვა`}
+              className="absolute right-2 top-2 rounded-full p-2 text-gray-500 transition hover:bg-white/10 hover:text-white">
+              <FaTimes size={12} />
+            </button>
           </div>
         );
       })}
