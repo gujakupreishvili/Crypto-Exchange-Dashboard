@@ -7,7 +7,7 @@ function getStatusColor(status: ConnectionStatus): string {
       return 'text-green-500';
     }
     case 'disconnected': {
-      return 'text-red-400';
+      return 'text-red-600 dark:text-red-400';
     }
     case 'loading':
     case 'reconnecting': {
@@ -23,7 +23,7 @@ export default function ConnectStatus() {
   const {connectionStatus} = useMarketStream();
 
   return (
-    <div className="border border-dashed border-gray-600 rounded-3xl px-4 flex items-center">
+    <div className="border border-dashed border-gray-300 dark:border-gray-600 rounded-3xl px-4 flex items-center">
       <p className={getStatusColor(connectionStatus)}>{connectionStatus}</p>
     </div>
   );

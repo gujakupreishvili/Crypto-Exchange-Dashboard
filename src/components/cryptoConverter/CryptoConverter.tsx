@@ -9,12 +9,12 @@ export default function CryptoConverter() {
   return (
     <section className="mx-4 mt-8 w-[95%] min-w-[320px] lg:w-[35%]">
       <div className="mb-4">
-        <h1 className="text-2xl font-semibold text-white">Crypto Converter</h1>
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Crypto Converter</h1>
 
         <p className="mt-1 text-sm text-gray-500">Convert between cryptocurrencies using live prices</p>
       </div>
 
-      <div className="rounded-2xl border border-gray-800 bg-gray-950 p-5 shadow-xl">
+      <div className="rounded-2xl border border-gray-800 bg-white dark:bg-gray-950 p-5 shadow-xl">
         <div>
           <div className="mb-2 flex items-center justify-between">
             <label className="text-sm font-medium text-gray-400">From</label>
@@ -38,8 +38,10 @@ export default function CryptoConverter() {
               value={amount}
               onChange={event => handleAmountChange(event.target.value)}
               placeholder="0.00"
-              className={`w-full rounded-xl border bg-gray-900 px-4 py-3 text-lg text-white outline-none transition placeholder:text-gray-600 ${
-                amountError ? 'border-red-500/50 focus:border-red-500' : 'border-gray-800 focus:border-gray-600'
+              className={`w-full rounded-xl border bg-gray-50 dark:bg-gray-900 px-4 py-3 text-lg text-gray-900 dark:text-white outline-none transition placeholder:text-gray-600 ${
+                amountError
+                  ? 'border-red-500/50 focus:border-red-500'
+                  : 'border-gray-800 focus:border-gray-300 dark:border-gray-600'
               }`}
             />
 
@@ -50,7 +52,7 @@ export default function CryptoConverter() {
             )}
           </div>
 
-          {amountError && <p className="mt-2 text-sm text-red-400">{amountError}</p>}
+          {amountError && <p className="mt-2 text-sm text-red-600 dark:text-red-400">{amountError}</p>}
         </div>
 
         <div className="relative my-5 flex items-center justify-center">
@@ -62,7 +64,7 @@ export default function CryptoConverter() {
               setFrom(to);
               setTo(from);
             }}
-            className="relative z-10 rounded-full border border-gray-700 bg-gray-950 p-2 text-gray-300 transition hover:border-gray-500 hover:text-white">
+            className="relative z-10 rounded-full border border-gray-700 bg-white dark:bg-gray-950 p-2 text-gray-300 transition hover:border-gray-500 hover:text-gray-900 dark:text-white">
             <IoSwapVertical className="text-xl" />
           </button>
         </div>
@@ -81,11 +83,11 @@ export default function CryptoConverter() {
         </div>
       </div>
 
-      <div className="mt-4 rounded-2xl border border-gray-800 bg-gray-900/60 p-5">
+      <div className="mt-4 rounded-2xl border border-gray-800 bg-gray-50 dark:bg-gray-900/60 p-5">
         <p className="text-sm font-medium text-gray-500">You will receive</p>
 
         <div className="mt-2 flex items-baseline gap-2">
-          <h2 className="text-3xl font-semibold text-white">
+          <h2 className="text-3xl font-semibold text-gray-900 dark:text-white">
             {Number.isFinite(result)
               ? result.toLocaleString(undefined, {
                   maximumFractionDigits: 8,

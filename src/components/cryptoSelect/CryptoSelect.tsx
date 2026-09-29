@@ -8,7 +8,7 @@ export default function CryptoSelect({value, onChange}: CryptoSelectProps) {
     <select
       value={value}
       onChange={event => onChange(event.target.value)}
-      className="w-full rounded-lg border border-gray-950 bg-gray-950 py-2 text-white outline-none">
+      className="w-full rounded-lg border border-gray-950 bg-white dark:bg-gray-950 py-2 text-gray-900 dark:text-white outline-none">
       <option value="">Select crypto</option>
 
       {Object.keys(baselines).map(symbol => (

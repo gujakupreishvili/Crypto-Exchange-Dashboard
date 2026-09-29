@@ -32,17 +32,17 @@ export default function MarketList() {
     <section className="mx-4 mt-8 lg:w-[60%] w-[95%] max-w-230.5">
       <div className="mb-4 flex flex-col lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-white">Market Place</h1>
+          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">Market Place</h1>
           <p className="mt-1 text-sm text-gray-400">Live cryptocurrency market prices</p>
         </div>
-        <div className="mt-5 inline-flex rounded-xl border border-gray-800 bg-gray-950 p-1 justify-around">
+        <div className="mt-5 inline-flex rounded-xl border border-gray-800 bg-white dark:bg-gray-950 p-1 justify-around">
           <button
             type="button"
             onClick={() => setChooseRow('all')}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
               chooseRow === 'all'
                 ? 'bg-white text-gray-950 shadow-sm'
-                : 'text-gray-400 hover:bg-gray-900 hover:text-white'
+                : 'text-gray-400 hover:bg-gray-50 dark:bg-gray-900 hover:text-gray-900 dark:text-white'
             }`}>
             All
           </button>
@@ -53,7 +53,7 @@ export default function MarketList() {
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
               chooseRow === 'favorite'
                 ? 'bg-white text-gray-950 shadow-sm'
-                : 'text-gray-400 hover:bg-gray-900 hover:text-white'
+                : 'text-gray-400 hover:bg-gray-50 dark:bg-gray-900 hover:text-gray-900 dark:text-white'
             }`}>
             Favorite
           </button>
@@ -64,14 +64,14 @@ export default function MarketList() {
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
               chooseRow === 'hidden'
                 ? 'bg-white text-gray-950 shadow-sm'
-                : 'text-gray-400 hover:bg-gray-900 hover:text-white'
+                : 'text-gray-400 hover:bg-gray-50 dark:bg-gray-900 hover:text-gray-900 dark:text-white'
             }`}>
             Hidden
           </button>
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-gray-800 bg-gray-950">
+      <div className="overflow-hidden rounded-2xl border border-gray-800 bg-white dark:bg-gray-950">
         {filteredMarkets.length === 0 ? (
           <div className="p-8 text-center text-gray-500">
             {connectionStatus === 'loading'

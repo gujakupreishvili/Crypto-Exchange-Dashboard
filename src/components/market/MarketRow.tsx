@@ -12,21 +12,25 @@ export default function MarketRow({
   onToggHideen,
 }: MarketRowProps) {
   const directionColor =
-    direction === 'up' ? 'text-green-400' : direction === 'down' ? 'text-red-400' : 'text-gray-400';
+    direction === 'up'
+      ? 'text-green-600 dark:text-green-400'
+      : direction === 'down'
+        ? 'text-red-600 dark:text-red-400'
+        : 'text-gray-400';
 
   const priceChanged = direction !== 'unchanged';
 
   return (
     <tr
       className={`cursor-pointer border-b border-gray-800/50 last:border-b-0 transition-colors duration-300 hover:bg-gray-800/40 ${
-        priceChanged ? 'bg-yellow-400/10' : 'bg-gray-900/60'
+        priceChanged ? 'bg-yellow-400/10' : 'bg-gray-50 dark:bg-gray-900/60'
       }`}>
-      <td className="px-5 py-4 font-medium text-white">
+      <td className="px-5 py-4 font-medium text-gray-900 dark:text-white">
         {symbol.replace('USDT', '')}
         <span className="ml-2 text-sm font-normal text-gray-500">/ USDT</span>
       </td>
 
-      <td className="px-5 py-4 text-center font-medium text-white">
+      <td className="px-5 py-4 text-center font-medium text-gray-900 dark:text-white">
         $
         {price.toLocaleString(undefined, {
           minimumFractionDigits: 2,
@@ -43,9 +47,13 @@ export default function MarketRow({
         <button
           type="button"
           aria-label="Add to favorites"
-          className="text-white transition-transform hover:scale-110"
+          className="text-gray-900 dark:text-white transition-transform hover:scale-110"
           onClick={onToggleFavorite}>
-          {isFavorite ? <FaStar className="mx-auto text-yellow-400" /> : <FaRegStar className="mx-auto text-white" />}
+          {isFavorite ? (
+            <FaStar className="mx-auto text-yellow-400" />
+          ) : (
+            <FaRegStar className="mx-auto text-gray-900 dark:text-white" />
+          )}
         </button>
       </td>
 
@@ -53,7 +61,7 @@ export default function MarketRow({
         <button
           type="button"
           aria-label="Hide market"
-          className="text-white transition-transform hover:scale-110"
+          className="text-gray-900 dark:text-white transition-transform hover:scale-110"
           onClick={onToggHideen}>
           {isHidden ? <FaRegEyeSlash /> : <FaRegEye />}
         </button>

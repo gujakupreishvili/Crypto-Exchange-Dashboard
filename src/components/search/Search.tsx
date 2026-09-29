@@ -11,8 +11,8 @@ export default function Search() {
   };
 
   return (
-    <div className="w-full rounded-3xl border border-gray-600 px-3 py-1 sm:w-64 flex items-center lg:gap-2">
-      <CiSearch className="text-white hidden lg:block" />
+    <div className="w-full rounded-3xl border border-gray-300 dark:border-gray-600 px-3 py-1 sm:w-64 flex items-center lg:gap-2">
+      <CiSearch className="text-gray-900 dark:text-white hidden lg:block" />
       <input
         type="text"
         placeholder="Search symbol or name"

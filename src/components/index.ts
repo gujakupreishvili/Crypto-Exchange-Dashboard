@@ -6,3 +6,4 @@ export * from './header';
 export * from './search';
 export * from './sort';
 export * from './market';
+export * from './themeToggle';

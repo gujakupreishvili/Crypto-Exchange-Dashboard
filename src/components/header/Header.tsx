@@ -1,10 +1,10 @@
-import {ConnectStatus, Search, Sort} from '@/components';
+import {ConnectStatus, Search, Sort, ThemeToggle} from '@/components';
 
 export default function Header() {
   return (
-    <header className="border-b border-gray-700 bg-black py-4 px-7 ">
+    <header className="border-b border-gray-300 bg-white py-4 px-7 dark:border-gray-700 dark:bg-black">
       <div className="flex flex-wrap items-center gap-3 max-w-360 mx-auto">
-        <h1 className="text-white">Logo</h1>
+        <h1 className="text-gray-900 dark:text-white">Logo</h1>
 
         <ConnectStatus />
 
@@ -15,6 +15,7 @@ export default function Header() {
 
           <Sort />
         </div>
+        <ThemeToggle />
       </div>
     </header>
   );
