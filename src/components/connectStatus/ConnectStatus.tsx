@@ -23,8 +23,10 @@ export default function ConnectStatus() {
   const {connectionStatus} = useMarketStream();
 
   return (
-    <div className="border border-dashed border-gray-300 dark:border-gray-600 rounded-3xl px-4 flex items-center">
-      <p className={getStatusColor(connectionStatus)}>{connectionStatus}</p>
+    <div className="flex items-center rounded-3xl border border-dashed border-gray-300 px-3 py-2 dark:border-gray-600">
+      <span className={`h-2.5 w-2.5 rounded-full bg-current mr-1 ${getStatusColor(connectionStatus)}`} />
+
+      <p className={` text-sm sm:ml-2  ${getStatusColor(connectionStatus)}`}>{connectionStatus}</p>
     </div>
   );
 }

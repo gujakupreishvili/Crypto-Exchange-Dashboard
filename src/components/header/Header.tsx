@@ -2,20 +2,29 @@ import {ConnectStatus, Search, Sort, ThemeToggle} from '@/components';
 
 export default function Header() {
   return (
-    <header className="border-b border-gray-300 bg-white py-4 px-7 dark:border-gray-700 dark:bg-black">
-      <div className="flex flex-wrap items-center gap-3 max-w-360 mx-auto">
-        <h1 className="text-gray-900 dark:text-white">Logo</h1>
+    <header className="border-b border-gray-200 bg-white px-5 py-4 dark:border-gray-800 dark:bg-black">
+      <div className="mx-auto flex max-w-360 flex-wrap items-center gap-4">
+        <div className="shrink-0">
+          <h1 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+            Crypto<span className="text-blue-600 dark:text-blue-400">Dash</span>
+          </h1>
+        </div>
 
-        <ConnectStatus />
-
-        <div className="flex w-full gap-2 sm:w-auto sm:flex-1 md:flex-none">
-          <div className="min-w-0 flex-1 sm:flex-none">
+        <div className="order-5 flex w-full gap-2 sm:order-0 sm:w-auto sm:flex-1">
+          <div className="min-w-0 flex-1">
             <Search />
           </div>
 
           <Sort />
         </div>
-        <ThemeToggle />
+
+        <div className="order-3 ml-auto sm:order-0 sm:ml-0">
+          <ConnectStatus />
+        </div>
+
+        <div className="order-4 sm:order-0">
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
