@@ -1,7 +1,7 @@
-import {themeToggleHelper} from './helper/themeToggleHelper';
+import {useToggleHelper} from './hook/useToggleHelper';
 
 export default function ThemeToggle() {
-  const {isDark, setIsDark} = themeToggleHelper();
+  const {isDark, setIsDark} = useToggleHelper();
 
   return (
     <button

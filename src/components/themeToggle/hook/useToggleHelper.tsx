@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-export const themeToggleHelper = () => {
+export const useToggleHelper = () => {
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });

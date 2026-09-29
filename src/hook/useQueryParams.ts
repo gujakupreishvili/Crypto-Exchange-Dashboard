@@ -27,6 +27,6 @@ export const useQueryParams = () => {
     getParam,
     setParam,
     handleChange,
-    sort
+    sort,
   };
 };
