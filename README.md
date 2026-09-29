@@ -166,3 +166,8 @@ Open [http://localhost:5173](http://localhost:5173).
 - Header wraps on small screens; search and sort stay usable.
 - Market table scrolls horizontally on narrow viewports.
 - Converter stacks beside the market list on large screens (`App` layout).
+
+
+## Bonus features
+
+- **Light/Dark theme** — Switch between light and dark themes with a responsive theme toggle. The selected theme is persisted in `localStorage` and restored after page refresh.
