@@ -29,7 +29,7 @@ export default function MarketList() {
   });
 
   return (
-    <section className="mx-4 mt-8 lg:w-[60%] w-[95%]">
+    <section className="mx-4 mt-8 lg:w-[60%] w-[95%] max-w-230.5">
       <div className="mb-4 flex flex-col lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-white">Market Place</h1>

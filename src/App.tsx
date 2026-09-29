@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <Header />
-      <div className=" flex flex-col lg:flex-row justify-between">
+      <div className=" flex flex-col lg:flex-row justify-between max-w-360 mx-auto ">
         <MarketList />
         <CryptoConverter />
       </div>
