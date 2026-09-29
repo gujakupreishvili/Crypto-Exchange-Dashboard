@@ -64,7 +64,7 @@ export default function CryptoConverter() {
               setFrom(to);
               setTo(from);
             }}
-            className="relative z-10 rounded-full border border-gray-700 bg-white dark:bg-gray-950 p-2 text-gray-300 transition hover:border-gray-500 hover:text-gray-900 dark:text-white">
+            className="relative z-10 rounded-full border border-gray-700 bg-white dark:bg-gray-950 p-2 text-gray-300 transition hover:border-gray-500 hover:rotate-180 duration-400 dark:text-white">
             <IoSwapVertical className="text-xl" />
           </button>
         </div>

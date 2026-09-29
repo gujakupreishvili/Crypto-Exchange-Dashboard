@@ -1,11 +1,7 @@
 import {useQueryParams} from '@hooks/useQueryParams';
 
 export default function Sort() {
-  const {getParam, setParam} = useQueryParams();
-  const sort = getParam('sort');
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setParam('sort', event.target.value);
-  };
+  const {sort, handleChange} = useQueryParams();
 
   return (
     <select

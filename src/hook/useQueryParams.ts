@@ -18,8 +18,15 @@ export const useQueryParams = () => {
     setSearchParams(params, {replace: true});
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setParam('sort', event.target.value);
+  };
+  const sort = getParam('sort');
+
   return {
     getParam,
     setParam,
+    handleChange,
+    sort
   };
 };
